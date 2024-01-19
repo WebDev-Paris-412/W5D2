@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import axios from "axios"
-const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
+import myApi from "../../api/apihandler"
+// import axios from "axios"
+// const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
 
 function AllProjectsPage() {
 	const [projects, setProjects] = useState(null)
 
 	async function fetchAllProjects() {
-		try {
-			const response = await axios.get(`${API_URL}/projects`)
-			// console.log(response)
-			setProjects(response.data)
-		} catch (error) {
-			console.error(error)
-		}
+		const response = await myApi.getAllProjects()
+		setProjects(response.data)
+
+		// 	// try {
+		// 	// 	// const response = await axios.get(`${API_URL}/projects`)
+		// 	// 	// console.log(response)
+		// 	// 	setProjects(response.data)
+		// 	// } catch (error) {
+		// 	// 	console.error(error)
+		// 	// }
 	}
 
 	useEffect(() => {

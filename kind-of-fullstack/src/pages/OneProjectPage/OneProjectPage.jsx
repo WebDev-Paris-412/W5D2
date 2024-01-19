@@ -2,10 +2,10 @@ import React from "react"
 import "./OneProjectPage.css"
 import { useState, useEffect, useRef } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
-import axios from "axios"
+// import axios from "axios"
 import TaskForm from "../../components/TaskForm/TaskForm"
-const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
-
+// const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
+import myApi from "../../api/apihandler"
 function OneProjectPage() {
 	const [project, setProject] = useState(null)
 	const [showForm, setShowForm] = useState(false)
@@ -16,9 +16,10 @@ function OneProjectPage() {
 
 	async function fetchOneProject() {
 		try {
-			const response = await axios.get(
-				`${API_URL}/projects/${projectId}?_embed=tasks`
-			)
+			const response = await myApi.getProjectById(projectId)
+			// const response = await axios.get(
+			// 	`${API_URL}/projects/${projectId}?_embed=tasks`
+			// )
 			setProject(response.data)
 		} catch (error) {
 			console.error(error)

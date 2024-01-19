@@ -1,6 +1,7 @@
 import { useState } from "react"
-import axios from "axios"
-const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
+import myApi from "../../api/apihandler"
+// import axios from "axios"
+// const API_URL = "https://project-management-api-4641927fee65.herokuapp.com"
 
 function TaskForm({ id, setShowForm, fetchProject }) {
 	const [formData, setFormData] = useState({
@@ -19,7 +20,8 @@ function TaskForm({ id, setShowForm, fetchProject }) {
 		try {
 			const taskToSend = { ...formData, projectId: Number(id) }
 			console.log(taskToSend)
-			const response = await axios.post(`${API_URL}/tasks`, taskToSend)
+			const response = await myApi.post("/tasks", taskToSend)
+			// const response = await axios.post(`${API_URL}/tasks`, taskToSend)
 			console.log(response)
 			setShowForm((current) => !current)
 			fetchProject()
